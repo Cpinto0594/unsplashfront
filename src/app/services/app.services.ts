@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AppServices {
-    API_URL       ="https://sheltered-atoll-33436.herokuapp.com"
+    API_URL       ="https://unsplashtestruby.herokuapp.com"
     SEARCH_IMAGES = `${this.API_URL}/api/v1/photos/search`;
     RANDOM_IMAGES = `${this.API_URL}/api/v1/photos/random`;
     USERLIKE      = `${this.API_URL}/api/v1/photos/PHOTO_ID/like`

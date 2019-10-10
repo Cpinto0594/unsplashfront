@@ -518,9 +518,10 @@ export class AppComponent implements OnInit {
         if (res.success) {
           this.arrImages = res.photos;
         } else {
-          alert('No se pudo cargar las imagenes')
+          alert('No se pudo cargar las imagenes ' + res.message)
         }
       }, () => {
+        alert('No se pudo cargar las imagenes ')
         this.searching = false
       }, () => {
         this.searching = false
@@ -533,7 +534,11 @@ export class AppComponent implements OnInit {
       .subscribe(res => {
         if (res.success) {
           this.arrFavImages = res.photos;
+        } else {
+          alert('No se pudo cargar las imagenes favoritas ' + res.message)
         }
+      }, () => {
+        alert('No se pudo cargar las imagenes ')
       })
   }
 
@@ -548,7 +553,7 @@ export class AppComponent implements OnInit {
       .likeImage(image.id)
       .subscribe(res => {
         if (res.success) {
-          alert('OK')
+          alert('Agregada a favoritos')
           let existe = this.arrFavImages.find(img => img.id === image.id);
           if (!existe) {
             this.arrFavImages.push(image)
@@ -557,10 +562,10 @@ export class AppComponent implements OnInit {
           image.likes--;
           image.liked_by_user = false;
           image.is_requesting = false;
-          alert(res.message)
+          alert('No se pudo agregar a favoritos ' + res.message)
         }
       }, () => {
-        alert('No se pudo dar me gusta')
+        alert('No se pudo agregar a favoritos ');
         image.liked_by_user = false;
         image.likes--;
         image.is_requesting = false;
@@ -602,7 +607,6 @@ export class AppComponent implements OnInit {
   }
 
   buscarImagenes() {
-    console.log('Text ', this.searchText)
     if (!this.searchText) return;
 
     this.searching = true;
@@ -612,13 +616,12 @@ export class AppComponent implements OnInit {
           this.arrImages = res.photos
         } else {
           this.searching = false;
-          alert(res.message)
+          alert('No se pudo cargar imagenes ' + res.message)
         }
       }, () => {
         this.searching = false;
-        alert('No se pudo consultar')
+        alert('No se pudo cargar imagenes ')
       }, () => {
-
         this.searching = false;
       });
 
